@@ -12,7 +12,7 @@ public:
     Window();
     ~Window();
 
-    void Create(const char* title, int width, int height);
+    void Create(const char* title);
     HWND GetWindowHandle() const; 
     RECT GetClientRect() const;
 
