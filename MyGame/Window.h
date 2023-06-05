@@ -6,6 +6,7 @@
 #include <windows.h>
 #include "Window.h"
 #include "WindowProc.h"
+#include <ShellScalingApi.h>
 
 class Window {
 public:

@@ -10,11 +10,21 @@ RendererManager::RendererManager(HWND hwnd, RECT clientRect)  // Add RECT parame
     ID2D1Factory* pFactory;
     D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &pFactory);
 
+    // Get the DPI for the window
+    UINT dpi = GetDpiForWindow(hwnd);
+
+    // Calculate the scaling factor
+    float scaleFactor = dpi / 96.0f;  // 96 DPI is the default
+
+    // Scale the dimensions of the client rectangle
+    UINT width = static_cast<UINT>((clientRect.right - clientRect.left) * scaleFactor);
+    UINT height = static_cast<UINT>((clientRect.bottom - clientRect.top) * scaleFactor);
+
     // Create a render target
     ID2D1HwndRenderTarget* pRenderTarget;
     pFactory->CreateHwndRenderTarget(
         D2D1::RenderTargetProperties(),
-        D2D1::HwndRenderTargetProperties(hwnd, D2D1::SizeU(clientRect.right - clientRect.left, clientRect.bottom - clientRect.top)),  // Use the size of the client rectangle
+        D2D1::HwndRenderTargetProperties(hwnd, D2D1::SizeU(width, height)),  // Use the scaled size
         &pRenderTarget
     );
 
@@ -24,6 +34,7 @@ RendererManager::RendererManager(HWND hwnd, RECT clientRect)  // Add RECT parame
     // Release the factory
     pFactory->Release();
 }
+
 
 RendererManager::~RendererManager() {
     // Delete the Renderer
@@ -84,4 +95,12 @@ void RendererManager::Cleanup() {
 
 RECT RendererManager::GetClientRect() const {
     return clientRect;
+}
+
+UINT RendererManager::GetRenderTargetWidth() const {
+    return clientRect.right - clientRect.left;
+}
+
+UINT RendererManager::GetRenderTargetHeight() const {
+    return clientRect.bottom - clientRect.top;
 }

@@ -16,13 +16,6 @@ Window::~Window() {
 }
 
 void Window::Create(const char* title, int width, int height) {
-
-    RECT windowRect = { 0, 0, width, height };
-    AdjustWindowRect(&windowRect, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU, FALSE);
-    int adjustedWidth = windowRect.right - windowRect.left;
-    int adjustedHeight = windowRect.bottom - windowRect.top;
-
-
     // Register the window class
     RegisterClass(&wc);
 
@@ -30,10 +23,10 @@ void Window::Create(const char* title, int width, int height) {
     hwnd = CreateWindowEx(
         0,                              // Optional window styles
         wc.lpszClassName,               // Window class
-        L"My Window",                   // Window text
+        L"My Window",                   // Window text. Change this line
         WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU,  // Window style
         CW_USEDEFAULT, CW_USEDEFAULT,   // Window initial position
-        adjustedWidth, adjustedHeight,  // Window size
+        width, height,                  // Window size
         NULL,                           // Parent window
         NULL,                           // Menu
         wc.hInstance,                   // Instance handle
@@ -51,5 +44,16 @@ HWND Window::GetWindowHandle() const {
 RECT Window::GetClientRect() const {
     RECT rect;
     ::GetClientRect(hwnd, &rect);
+
+    // Get the DPI for the window
+    UINT dpi = GetDpiForWindow(hwnd);
+
+    // Calculate the scaling factor
+    float scaleFactor = dpi / 96.0f;  // 96 DPI is the default
+
+    // Scale the client rectangle
+    rect.right = static_cast<LONG>(rect.right * scaleFactor);
+    rect.bottom = static_cast<LONG>(rect.bottom * scaleFactor);
+
     return rect;
 }
