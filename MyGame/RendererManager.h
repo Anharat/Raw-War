@@ -16,6 +16,8 @@ public:
     void Render();
     void Cleanup();
     RECT GetClientRect() const;  // Add this line
+    UINT GetRenderTargetWidth() const;  // Add this line
+    UINT GetRenderTargetHeight() const;  // Add this line
 
 private:
     Renderer* renderer;
