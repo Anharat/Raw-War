@@ -16,6 +16,13 @@ Window::~Window() {
 }
 
 void Window::Create(const char* title, int width, int height) {
+
+    RECT windowRect = { 0, 0, width, height };
+    AdjustWindowRect(&windowRect, WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU, FALSE);
+    int adjustedWidth = windowRect.right - windowRect.left;
+    int adjustedHeight = windowRect.bottom - windowRect.top;
+
+
     // Register the window class
     RegisterClass(&wc);
 
@@ -23,10 +30,10 @@ void Window::Create(const char* title, int width, int height) {
     hwnd = CreateWindowEx(
         0,                              // Optional window styles
         wc.lpszClassName,               // Window class
-        L"My Window",                   // Window text. Change this line
+        L"My Window",                   // Window text
         WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU,  // Window style
         CW_USEDEFAULT, CW_USEDEFAULT,   // Window initial position
-        width, height,                  // Window size
+        adjustedWidth, adjustedHeight,  // Window size
         NULL,                           // Parent window
         NULL,                           // Menu
         wc.hInstance,                   // Instance handle
