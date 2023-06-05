@@ -1,6 +1,6 @@
 # Raw War
 
-No fancy warriors, no lame story lines.  This is only kill or being killed, this is only Raw War.
+No fancy warriors, no lame story lines.  This is only kill or be killed, this is only Raw War.
 
 
 
