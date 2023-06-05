@@ -1,9 +1,9 @@
 // Position.cpp
 
-#include "Position.h"
+#include "Position.h"  // Include the Position header file
 
-Position::Position(float x, float y) : x(x), y(y) {
-    // Constructor implementation
-    // Set the x-coordinate of the position using the provided x value
-    // Set the y-coordinate of the position using the provided y value
+// Constructor implementation
+Position::Position(float x, float y)
+    : x(x), y(y) {
+    // Initialize x and y with the provided values
 }

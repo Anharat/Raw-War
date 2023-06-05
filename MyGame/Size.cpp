@@ -1,9 +1,9 @@
 // Size.cpp
 
-#include "Size.h"
+#include "Size.h"  // Include the Size header file
 
-Size::Size(float width, float height) : width(width), height(height) {
-    // Constructor implementation
-    // Set the width of the size using the provided width value
-    // Set the height of the size using the provided height value
+// Constructor implementation
+Size::Size(float width, float height)
+    : width(width), height(height) {
+    // Initialize width and height with the provided values
 }

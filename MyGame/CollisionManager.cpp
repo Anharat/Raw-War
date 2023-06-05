@@ -2,57 +2,58 @@
 
 #include "CollisionManager.h"
 
+// Default constructor for the CollisionManager
 CollisionManager::CollisionManager() {
-    // Constructor implementation
+    // No specific initialization logic required
 }
 
+// Destructor for the CollisionManager
 CollisionManager::~CollisionManager() {
-    // Destructor implementation
+    // No specific clean-up logic required
 }
 
+// Method to check if two GameObjects are colliding based on their positions and dimensions
 bool CollisionManager::CheckCollision(const GameObject& object1, const GameObject& object2) {
-    // Check if the bounding boxes of the two GameObjects overlap
-    // This is a simple AABB collision detection
+    // Check if the bounding boxes of the two GameObjects overlap (AABB collision detection)
+    // If the boxes overlap, it means the two GameObjects are colliding
     if (object1.position.x < object2.position.x + object2.size.width &&
         object1.position.x + object1.size.width > object2.position.x &&
         object1.position.y < object2.position.y + object2.size.height &&
         object1.position.y + object1.size.height > object2.position.y) {
-        // The bounding boxes overlap, so there is a collision
-        return true;
+        return true;  // The GameObjects are colliding
     }
 
-    
-    return false;
+    return false;  // The GameObjects are not colliding
 }
 
+// Method to predict the future position of a GameObject based on its current state and a time delta
 Position CollisionManager::PredictFuturePosition(const GameObject& object, double deltaTime) {
-    Position futurePosition = object.position;
+    Position futurePosition = object.position;  // Initialize the future position to the current position
 
-    double framesAhead = 0.5;
+    double framesAhead = 0.5;  // Number of frames to look ahead
 
-    keyboardHandler.Update();
+    keyboardHandler.Update();  // Update the state of the keyboard handler
 
-    // Calculate the future position based on the current velocity and direction
+    // Adjust the future position based on the current keyboard input and GameObject's speed
     if (keyboardHandler.IsKeyDown('W')) {
-        futurePosition.y -= static_cast<float>(object.speed * deltaTime * framesAhead);
+        futurePosition.y -= static_cast<float>(object.speed * deltaTime * framesAhead);  // Move up
     }
     if (keyboardHandler.IsKeyDown('S')) {
-        futurePosition.y += static_cast<float>(object.speed * deltaTime * framesAhead);
+        futurePosition.y += static_cast<float>(object.speed * deltaTime * framesAhead);  // Move down
     }
     if (keyboardHandler.IsKeyDown('A')) {
-        futurePosition.x -= static_cast<float>(object.speed * deltaTime * framesAhead);
+        futurePosition.x -= static_cast<float>(object.speed * deltaTime * framesAhead);  // Move left
     }
     if (keyboardHandler.IsKeyDown('D')) {
-        futurePosition.x += static_cast<float>(object.speed * deltaTime * framesAhead);
+        futurePosition.x += static_cast<float>(object.speed * deltaTime * framesAhead);  // Move right
     }
 
-
-    return futurePosition;
+    return futurePosition;  // Return the predicted future position
 }
 
-// CollisionManager.cpp
+// Method to predict the future left and right positions of a GameObject
 Position CollisionManager::PredictFutureLeftAndRightPosition(const GameObject& gameObject, double deltaTime) {
-    Position futurePosition = gameObject.position;
+    Position futurePosition = gameObject.position;  // Initialize the future position to the current position
 
     // Calculate the left and right positions based on the initial position
     float leftPosition = gameObject.initialPosition.x - 200.0f;
@@ -78,21 +79,27 @@ Position CollisionManager::PredictFutureLeftAndRightPosition(const GameObject& g
         futurePosition.x = newPosition;
     }
 
+    // Return the future position. This will either be the same as the original position if no key was pressed,
+    // or it will be a new position reflecting the calculated movement.
     return futurePosition;
 }
 
+// Method to get the GameObject that is colliding with the provided GameObject
 const GameObject* CollisionManager::GetCollidingObject(const GameObject& object1, const GameObject& object2) {
-    // Check if the bounding boxes of the two GameObjects overlap
+    // Check if the bounding boxes of the two GameObjects overlap using AABB collision detection
     if (object1.position.x < object2.position.x + object2.size.width &&
         object1.position.x + object1.size.width > object2.position.x &&
         object1.position.y < object2.position.y + object2.size.height &&
         object1.position.y + object1.size.height > object2.position.y) {
-        // The bounding boxes overlap, so there is a collision
-        return &object2;  // Return a pointer to the colliding GameObject
+        // If the bounding boxes overlap, a collision is occurring
+        // Return a pointer to the GameObject that is colliding with the provided GameObject
+        return &object2;
     }
 
-    return nullptr;  // Return nullptr if no collision was found
+    // If there was no collision detected, return a nullptr
+    return nullptr;
 }
+
 
 
 

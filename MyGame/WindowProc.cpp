@@ -2,74 +2,68 @@
 
 #include "WindowProc.h"
 
-WindowProc::WindowProc(HWND hwnd) : hwnd(hwnd) {  // Use colon instead of comma
-    // Constructor code here
-    RegisterObserver(&GameState::GetInstance());  // Register GameState as an observer
+// Constructor: initializes hwnd and registers GameState as an observer.
+WindowProc::WindowProc(HWND hwnd) : hwnd(hwnd) {
+    RegisterObserver(&GameState::GetInstance());
 }
 
+// Destructor: unregister GameState as an observer.
 WindowProc::~WindowProc() {
-    // Destructor code here
-    UnregisterObserver(&GameState::GetInstance());  // Unregister GameState as an observer
+    UnregisterObserver(&GameState::GetInstance());
 }
 
+// Handle window messages and control game state.
 LRESULT CALLBACK WindowProc::WndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-    // Handle window messages here
-
-    static bool isPaused = false;  // Add this line
+    // Static variable for keeping track of the paused state
+    static bool isPaused = false;
 
     switch (uMsg) {
     case WM_ACTIVATE:
-        // The window is being activated or deactivated.
+        // Handle window activation and deactivation
         if (LOWORD(wParam) == WA_INACTIVE) {
-            // The window is being deactivated.
             GameState::GetInstance().Pause();
         }
         else {
-            // The window is being activated.
             GameState::GetInstance().Resume();
         }
         return 0;
 
     case WM_NCLBUTTONDOWN:
-        // The left mouse button is pressed in the non-client area.
-        if (wParam == HTCAPTION) {  // Check if the user clicked on the title bar
+        // Handle left mouse button pressed in the non-client area (title bar)
+        if (wParam == HTCAPTION) {
             GameState::GetInstance().Pause();
-            isPaused = true;  // Add this line
-            OutputDebugString(L"Left mouse button pressed in non-client area, game paused\n");  // Add debug output
+            isPaused = true;
         }
-        break;  // Let the default window procedure handle the message
+        break;
 
     case WM_NCMOUSEMOVE:
-        // The mouse is moved in the non-client area.
-        if (isPaused) {  // Check if the game is paused
+        // Handle mouse movement in the non-client area
+        if (isPaused) {
             GameState::GetInstance().Resume();
-            isPaused = false;  // Add this line
-            OutputDebugString(L"Mouse moved in non-client area, game resumed\n");  // Add debug output
+            isPaused = false;
         }
-        break;  // Let the default window procedure handle the message
+        break;
 
     case WM_CLOSE:
-        // The window is being closed.
-        PostQuitMessage(0);  // Post a WM_QUIT message to the message queue
+        // Handle window closing
+        PostQuitMessage(0);
         return 0;
     }
 
     return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
-
-
-
-
-
+// Register an observer in the observer list.
 void WindowProc::RegisterObserver(IObserver* observer) {
     observers.push_back(observer);
 }
 
+// Remove an observer from the observer list.
 void WindowProc::UnregisterObserver(IObserver* observer) {
     observers.erase(std::remove(observers.begin(), observers.end(), observer), observers.end());
 }
 
+// Notify all observers by calling their Update method.
 void WindowProc::NotifyObservers() {
     for (IObserver* observer : observers) {
         observer->Update();

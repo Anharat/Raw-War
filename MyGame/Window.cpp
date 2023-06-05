@@ -2,6 +2,7 @@
 
 #include "Window.h"
 
+// Constructor initializes the WNDCLASS structure
 Window::Window() {
     // Initialize WNDCLASS structure
     wc = { 0 };
@@ -10,11 +11,13 @@ Window::Window() {
     wc.lpszClassName = L"MyWindowClass";
 }
 
+// Destructor cleans up the window class.
 Window::~Window() {
-    // Cleanup
+    // Cleanup: unregister the window class
     UnregisterClass(wc.lpszClassName, wc.hInstance);
 }
 
+// Create a new window with the specified title, width, and height.
 void Window::Create(const char* title, int width, int height) {
     // Register the window class
     RegisterClass(&wc);
@@ -23,7 +26,7 @@ void Window::Create(const char* title, int width, int height) {
     hwnd = CreateWindowEx(
         0,                              // Optional window styles
         wc.lpszClassName,               // Window class
-        L"My Window",                   // Window text. Change this line
+        L"Raw War",                   // Window text
         WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU,  // Window style
         CW_USEDEFAULT, CW_USEDEFAULT,   // Window initial position
         width, height,                  // Window size
@@ -37,10 +40,12 @@ void Window::Create(const char* title, int width, int height) {
     ShowWindow(hwnd, SW_SHOW);
 }
 
+// Get the handle to the window
 HWND Window::GetWindowHandle() const {
     return hwnd;
 }
 
+// Get the client rectangle of the window and scale it according to the DPI of the window
 RECT Window::GetClientRect() const {
     RECT rect;
     ::GetClientRect(hwnd, &rect);
