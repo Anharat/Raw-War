@@ -67,7 +67,7 @@ void Setup(const RECT& clientRect) {
     GameState::GetInstance().AddGameObject(wall3);
 
     // Add a third wall
-    GameObject wall4(100.0f, 400.0f, 50.0f, 50.0f, 0, 255, 0, 255, ObjectType::Wall, 0.0f, 0.0f, MovementPattern::Stationary, FiringPattern::NoFiring, 0.0f);
+    GameObject wall4(450.0f, 400.0f, 50.0f, 50.0f, 0, 255, 0, 255, ObjectType::Wall, 0.0f, 0.0f, MovementPattern::Stationary, FiringPattern::NoFiring, 0.0f);
     GameState::GetInstance().AddGameObject(wall4);
 
 

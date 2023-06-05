@@ -15,10 +15,7 @@ Window::~Window() {
     UnregisterClass(wc.lpszClassName, wc.hInstance);
 }
 
-void Window::Create(const char* title) {
-    int screenWidth = GetSystemMetrics(SM_CXSCREEN); // Get the screen width
-    int screenHeight = GetSystemMetrics(SM_CYSCREEN); // Get the screen height
-
+void Window::Create(const char* title, int width, int height) {
     // Register the window class
     RegisterClass(&wc);
 
@@ -29,7 +26,7 @@ void Window::Create(const char* title) {
         L"My Window",                   // Window text. Change this line
         WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU,  // Window style
         CW_USEDEFAULT, CW_USEDEFAULT,   // Window initial position
-        screenWidth, screenHeight,      // Window size
+        width, height,                  // Window size
         NULL,                           // Parent window
         NULL,                           // Menu
         wc.hInstance,                   // Instance handle

@@ -156,13 +156,6 @@ void MovementManager::HandleLeftAndRightMovement(int id, GameObject& gameObject,
         // If the new position is between the left and right positions, update the position
         gameObject.position.x = newPosition;
     }
-
-    // Check if the GameObject is an Enemy and if its health is 0 or less
-    if (gameObject.objectType == ObjectType::Enemy && gameObject.health.currentHealth <= 0) {
-
-        // Remove the GameObject from the GameState
-        GameState::GetInstance().MarkForRemoval(id);
-    }
 }
 
 void MovementManager::HandleTargetMovement(int id, GameObject& gameObject, double deltaTime) {
@@ -201,11 +194,11 @@ void MovementManager::HandleTargetMovement(int id, GameObject& gameObject, doubl
             auto& modifiableGameObjects = GameState::GetInstance().GetModifiableGameObjects();
             if (collidingObject->objectType == ObjectType::Player) {
                 // If the colliding object is a player, reduce its health by 10
-                modifiableGameObjects[pair.first].health.SetCurrentHealth(modifiableGameObjects[pair.first].health.currentHealth - 10);
+                modifiableGameObjects[pair.first].health.currentHealth -= 10;
             }
             else if (collidingObject->objectType == ObjectType::Enemy) {
                 // If the colliding object is an enemy, reduce its health by 10
-                modifiableGameObjects[pair.first].health.SetCurrentHealth(modifiableGameObjects[pair.first].health.currentHealth - 10);
+                modifiableGameObjects[pair.first].health.currentHealth -= 10;
             }
             // Remove the GameObject from the GameState
             GameState::GetInstance().MarkForRemoval(id);

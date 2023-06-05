@@ -5,14 +5,15 @@
 GameLoop::GameLoop(HINSTANCE hInstance, int nCmdShow)
     : hInstance(hInstance), nCmdShow(nCmdShow), window(), windowProc(window.GetWindowHandle()), timer() {
     // Create the window
-    window.Create("My Window");
+    window.Create("My Window", 1200, 700);
 
     // Get the client rectangle of the window
     RECT clientRect = window.GetClientRect();
 
     // Create the RendererManager
     rendererManager = new RendererManager(window.GetWindowHandle(), clientRect);
-        
+
+    // Don't create the GameMechanicsManager here
 }
 
 GameLoop::~GameLoop() {
