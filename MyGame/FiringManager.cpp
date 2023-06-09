@@ -60,7 +60,7 @@ void FiringManager::HandleKeyboardFiring(int id, GameObject& gameObject) {
 
 
 void FiringManager::HandleSteadyFiring(int id, GameObject& gameObject) {
-    const double firingInterval = 1.0;  // Set the firing interval to 1 second
+    const double firingInterval = 0.5;  // Set the firing interval to 1 second
 
     // Get or create the timer for this game object
     Timer& steadyFiringTimer = steadyFiringTimers[id];

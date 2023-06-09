@@ -210,9 +210,6 @@
     <ClInclude Include="FiringManager.h">
       <Filter>Header Files\GameMechanicsManager</Filter>
     </ClInclude>
-    <ClInclude Include="Target.h">
-      <Filter>Header Files\Game Objects</Filter>
-    </ClInclude>
     <ClInclude Include="InitialPosition.h">
       <Filter>Header Files\Game Objects</Filter>
     </ClInclude>

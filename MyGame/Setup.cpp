@@ -60,14 +60,14 @@ void Setup(const RECT& clientRect) {
     // The parameters for each GameObject instance represent their initial properties such as position, size, color, movement and firing patterns
 
     // Add initial position to the enemy GameObject
-    GameObject enemy1(600.0f, 200.0f, 50.0f, 50.0f, 255, 0, 0, 255, ObjectType::Enemy, 200.0f, 0.0f, MovementPattern::LeftAndRight, FiringPattern::SteadyFiring, 200.0f, 600.0f, 200.0f, 200.0f, 100.0f);
+    GameObject enemy1(600.0f, 200.0f, 50.0f, 50.0f, 255, 0, 0, 255, ObjectType::Enemy, 200.0f, 0.0f, MovementPattern::LeftAndRight, FiringPattern::SteadyFiring, 200.0f, 600.0f, 200.0f, 200.0f, 50.0f);
     GameState::GetInstance().AddGameObject(enemy1);
 
     // Add initial position to the enemy GameObject
-    GameObject enemy2(600.0f, 500.0f, 50.0f, 50.0f, 255, 0, 0, 255, ObjectType::Enemy, 200.0f, 0.0f, MovementPattern::LeftAndRight, FiringPattern::SteadyFiring, 200.0f, 600.0f, 200.0f, 200.0f, 100.0f);
+    GameObject enemy2(600.0f, 500.0f, 50.0f, 50.0f, 255, 0, 0, 255, ObjectType::Enemy, 200.0f, 0.0f, MovementPattern::LeftAndRight, FiringPattern::SteadyFiring, 200.0f, 600.0f, 200.0f, 200.0f, 50.0f);
     GameState::GetInstance().AddGameObject(enemy2);
 
-    GameObject player(50.0f, 50.0f, 50.0f, 50.0f, 255, 255, 255, 255, ObjectType::Player, 200.0f, 0.0f, MovementPattern::Keyboard, FiringPattern::KeyboardFiring, 200.0f, 200.0f, 200.0f, 200.0f, 100.f);
+    GameObject player(50.0f, 50.0f, 50.0f, 50.0f, 255, 255, 255, 255, ObjectType::Player, 200.0f, 0.0f, MovementPattern::Keyboard, FiringPattern::KeyboardFiring, 200.0f, 200.0f, 200.0f, 200.0f, 200.f);
     GameState::GetInstance().AddGameObject(player);
 
     GameObject wall(250.0f, 60.0f, 50.0f, 50.0f, 0, 255, 0, 255, ObjectType::Wall, 0.0f, 0.0f, MovementPattern::Stationary, FiringPattern::NoFiring, 0.0f);
