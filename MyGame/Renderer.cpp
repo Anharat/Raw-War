@@ -4,13 +4,20 @@
 
 // Constructor implementation. Takes a pointer to an ID2D1HwndRenderTarget as an argument.
 // Initializes member variables and creates a solid color brush for rendering.
+
 Renderer::Renderer(ID2D1HwndRenderTarget* pRenderTarget)
-    : pRenderTarget(pRenderTarget) {
+    : pRenderTarget(pRenderTarget), pBrush(nullptr) {
     // Create a solid color brush, initially set to black color, for drawing on the render target.
-    pRenderTarget->CreateSolidColorBrush(
-        D2D1::ColorF(D2D1::ColorF::Black),
-        &pBrush
-    );
+    if (pRenderTarget) {
+        HRESULT brushResult = pRenderTarget->CreateSolidColorBrush(
+            D2D1::ColorF(D2D1::ColorF::Black),
+            &pBrush
+        );
+        if (FAILED(brushResult)) {
+            // Handle the error gracefully
+            pBrush = nullptr;
+        }
+    }
 }
 
 // Destructor implementation. Releases any resources used by the class.
