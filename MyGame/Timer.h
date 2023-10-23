@@ -1,7 +1,21 @@
-// Timer.h
+/**
+* @file Timer.h
+* @brief Declares the Timer class for the Raw-War game.
+* * The Timer class provides the functionalities to measure elapsed time.
+* *
+* * Dependencies:
+* *  - chrono: Used for time-related functionalities.
+* *
+* * Key Components:
+* *  - High Resolution Clock: Used for measuring time with high precision.
+* *
+* * @note The Timer class uses the high-resolution clock from the chrono library.
+* */
 
 #ifndef TIMER_H
 #define TIMER_H
+
+// Include necessary header files
 
 #include <chrono> // Include C++ Standard Library's chrono library for time-related functions
 

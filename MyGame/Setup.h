@@ -1,7 +1,13 @@
-//Setup.h
+//** 
+// @file Setup.h
+// @brief Declares the Setup function for the Raw-War game.
+// * The Setup function initializes the game state with the initial game objects.
+// *
 
 #ifndef SETUP_H
 #define SETUP_H
+
+// Include necessary header files
 
 #include "GameState.h" // Include the GameState class which represents the state of the game at any given instance
 #include "GameObject.h" // Include the GameObject class which represents an object in the game (e.g., player, enemy, wall)

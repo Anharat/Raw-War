@@ -1,24 +1,44 @@
-// MyGame.cpp
+/**
+ * @file MyGame.cpp
+ * @brief Main entry point for the Raw-War game.
+ *
+ * This file initializes the game environment, ensuring optimal display settings and then enters the game loop.
+ *
+ * Dependencies:
+ *  - Windows API: Provides core Windows functionalities.
+ *  - GameLoop: Custom class that manages the game's main loop.
+ *  - ShellScalingApi: Enables the game to be DPI-aware, ensuring sharp visuals on high-resolution displays.
+ *
+ * Libraries:
+ *  - Shcore.lib: Library linked for DPI-awareness functionalities.
+ */
 
-#include <windows.h>  // Windows API
-#include "GameLoop.h"  // GameLoop class
-#include <ShellScalingApi.h>  // Header for DPI-awareness function (SetProcessDpiAwareness)
-#pragma comment(lib, "Shcore.lib")  // Linking Shcore.lib library (for DPI-awareness)
+#include <windows.h>          // Core Windows functionalities.
+#include "GameLoop.h"         // Handles the game's main loop.
+#include <ShellScalingApi.h>  // Functions related to DPI-awareness.
+#pragma comment(lib, "Shcore.lib")  // Linking required library for DPI-awareness.
 
-
-// The entry point of the Windows application
+ /**
+  * @brief The main entry point for the Raw-War game on Windows.
+  *
+  * @param hInstance Handle to the current instance of the application.
+  * @param hPrevInstance Handle to the previous instance of the application (always NULL in modern Windows).
+  * @param lpCmdLine Command line arguments as a single string, excluding the program name.
+  * @param nCmdShow Specifies how the window is to be shown (e.g., minimized, maximized).
+  *
+  * @return int Returns 0 upon successful execution.
+  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
-    // Set the process DPI aware. This ensures that the application is aware of the DPI (dots per inch) settings 
-    // for each monitor, which can be useful if you have high-resolution displays or multiple monitors with 
-    // different DPI settings.
+
+    // Make the game aware of monitor DPI settings. Essential for high-res displays or multi-monitor setups.
     SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
 
-    // Create a GameLoop instance and pass the instance handle (hInstance) and command show option (nCmdShow)
+    // Initialize the game environment.
     GameLoop gameLoop(hInstance, nCmdShow);
 
-    // Run the game loop
+    // Enter the main game loop.
     gameLoop.Run();
 
-    // Exit the program
+    // Exit the game.
     return 0;
 }

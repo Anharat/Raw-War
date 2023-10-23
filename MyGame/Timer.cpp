@@ -1,6 +1,15 @@
-// Timer.cpp
+/** 
+* @file Timer.cpp
+* @brief Implements the Timer class for the Raw-War game.
+* * The Timer class provides the functionalities to measure elapsed time.
+* * 
+* * This source file provides the actual implementation of the Timer class declared in Timer.h.
+* */
 
 #include "Timer.h"
+
+// The Timer class provides the functionalities to measure elapsed time
+// The Timer class uses the high-resolution clock from the chrono library
 
 // The Timer constructor resets the timer when a Timer object is created
 Timer::Timer() {

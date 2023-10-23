@@ -1,8 +1,24 @@
-// GameLoop.cpp
+/**
+ * @file GameLoop.cpp
+ * @brief Implements the GameLoop class functions for the Raw-War game.
+ *
+ * The GameLoop class provides the functionalities to initialize the game, run the main game loop,
+ * handle game updates, manage rendering, and perform cleanup operations at the end.
+ *
+ * This source file provides the actual implementation of the functions declared in the GameLoop header.
+ */
 
-#include "GameLoop.h"  // Include the GameLoop header file
+#include "GameLoop.h"  // GameLoop class definition
 
-// Constructor implementation
+ /**
+  * @brief Constructs the GameLoop object.
+  *
+  * Initializes the game loop variables, sets up the window, and prepares the RendererManager.
+  *
+  * @param hInstance Handle to the current instance of the application.
+  * @param nCmdShow Controls how the main window is displayed.
+  */
+
 GameLoop::GameLoop(HINSTANCE hInstance, int nCmdShow)
     : hInstance(hInstance), nCmdShow(nCmdShow), window(), windowProc(window.GetWindowHandle()), timer() {
     // Create the window with specified title and dimensions
@@ -16,7 +32,12 @@ GameLoop::GameLoop(HINSTANCE hInstance, int nCmdShow)
         
 }
 
-// Destructor implementation
+/**
+ * @brief Destructs the GameLoop object.
+ *
+ * Ensures proper cleanup of dynamically allocated resources.
+ */
+
 GameLoop::~GameLoop() {
     // Delete the RendererManager
     delete rendererManager;
@@ -24,6 +45,12 @@ GameLoop::~GameLoop() {
     // Delete the GameMechanicsManager
     delete gameMechanicsManager;
 }
+
+/**
+ * @brief Sets up the initial game state and initializes necessary managers.
+ *
+ * Prepares the game for the main game loop.
+ */
 
 void GameLoop::Initialize() {
     // Get the client rectangle of the window
@@ -41,6 +68,12 @@ void GameLoop::Initialize() {
     // Output a debug string to indicate that initialization is complete
     OutputDebugString(L"Initialize\n");
 }
+
+/**
+ * @brief Sets up the initial game state.
+ *
+ * @param clientRect The client rectangle of the window.
+ */
 
 void GameLoop::Update(double deltaTime) {
     // Skip the update if the game is paused
@@ -78,10 +111,20 @@ void GameLoop::Update(double deltaTime) {
     }
 }
 
+/**
+ * @brief Renders the current game state.
+ */
+
 void GameLoop::Render() {
     // Call the Render method of RendererManager to render the game state
     rendererManager->Render();
 }
+
+/**
+ * @brief Sets up the initial game state.
+ *
+ * @param clientRect The client rectangle of the window.
+ */
 
 void GameLoop::Run() {
     // Initialize the game loop
@@ -131,7 +174,11 @@ void GameLoop::Run() {
     Cleanup();
 }
 
-
+/**
+ * @brief Sets up the initial game state.
+ *
+ * @param clientRect The client rectangle of the window.
+ */
 void GameLoop::Cleanup() {
     // This method is responsible for cleaning up resources before the game loop ends
 
