@@ -7,3 +7,5 @@ Firing is with number 1.
 
 Player health is the health bar in the bottom left.
 Enemy health bars are on the top right.
+
+Close the window when either you run out of health or the enemy runs out of health.
