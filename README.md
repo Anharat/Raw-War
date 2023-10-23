@@ -1,9 +1,6 @@
 # Raw War
 
-No fancy warriors, no lame story lines.  This is only kill or be killed, this is only Raw War.
-
-
-
+Clone the repository and open in Visual Studio Code
 
 Movement is with w,a,s,d for direction.
 Firing is with number 1.
