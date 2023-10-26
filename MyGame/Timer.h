@@ -1,41 +1,50 @@
 /**
-* @file Timer.h
-* @brief Declares the Timer class for the Raw-War game.
-* * The Timer class provides the functionalities to measure elapsed time.
-* *
-* * Dependencies:
-* *  - chrono: Used for time-related functionalities.
-* *
-* * Key Components:
-* *  - High Resolution Clock: Used for measuring time with high precision.
-* *
-* * @note The Timer class uses the high-resolution clock from the chrono library.
-* */
+ * @file Timer.h
+ * @brief Header file for the Timer class.
+ *
+ * The Timer class provides utilities for measuring time intervals with high precision.
+ * This is especially useful in contexts like game loops, animations, and other time-sensitive operations.
+ */
 
-#ifndef TIMER_H
+#ifndef TIMER_H  // Preprocessor directive to prevent multiple inclusions of the header file
 #define TIMER_H
 
-// Include necessary header files
+ // Include necessary header files
+#include <chrono>  /**< Include the C++ Standard Library's chrono library for high-resolution time-related functionalities. */
 
-#include <chrono> // Include C++ Standard Library's chrono library for time-related functions
-
-// The Timer class provides functionality to measure elapsed time
+/**
+ * @class Timer
+ * @brief Timer class to measure elapsed time intervals with high precision.
+ */
 class Timer {
 public:
-    // Constructor for the Timer class. When a Timer object is created, the timer is automatically reset
+    /**
+     * @brief Default constructor for the Timer class.
+     *
+     * Initializes the Timer object by setting its start time to the current time.
+     */
     Timer();
 
-    // Reset the timer by setting the start time to the current time
+    /**
+     * @brief Resets the timer's start time.
+     *
+     * This method updates the start time of the Timer object to the current time, effectively
+     * resetting the elapsed time.
+     */
     void Reset();
 
-    // Get the time elapsed since the timer was last reset
-    // Return value is in seconds and it is a floating point number, for higher precision
+    /**
+     * @brief Calculates the elapsed time since the Timer was last reset or instantiated.
+     *
+     * This method computes the duration between the current time and the start time
+     * (which is either the time when the Timer object was created or the last time it was reset).
+     *
+     * @return Elapsed time in seconds as a double.
+     */
     double GetElapsedTime() const;
 
 private:
-    // Store the start time. This is the time when the timer was last reset.
-    // It is a point in time from the system's high resolution clock
-    std::chrono::high_resolution_clock::time_point startTime;
+    std::chrono::high_resolution_clock::time_point startTime;  /**< Start time for the timer, stored as a high-resolution time point. */
 };
 
-#endif // TIMER_H
+#endif  // TIMER_H

@@ -1,22 +1,28 @@
 /**
  * @file Setup.cpp
- * @brief Implements the Setup function for the Raw-War game.
- * * The Setup function initializes the game state with the initial game objects.
- * * 
- * * This source file provides the actual implementation of the Setup function declared in Setup.h.
- * */
+ * @brief Sets up the initial game state for the Raw-War game.
+ *
+ * This source file contains the `Setup` function that initializes the game state
+ * by creating boundary walls, enemies, the player, and other game objects.
+ */
 
 
 #include "Setup.h"
 
 
-/**
- * @brief Sets up the initial game state.
- *
- * This function initializes the game state with the initial game objects.
- *
- * @param clientRect The client rectangle of the game window.
- */
+ /**
+  * @brief Sets up the initial game objects and game state.
+  *
+  * This function initializes various game objects such as boundary walls, enemies, player,
+  * and other additional walls. It then adds these objects to the game state.
+  *
+  * Each game object is defined by its position, size, color, movement pattern, firing pattern,
+  * and other properties. The function makes use of constants and calculated values to
+  * determine the properties of each game object.
+  *
+  * @param clientRect The client rectangle of the game window, which provides the dimensions
+  * for positioning the game objects.
+  */
 
 // Implement the Setup function defined in Setup.h
 void Setup(const RECT& clientRect) {
